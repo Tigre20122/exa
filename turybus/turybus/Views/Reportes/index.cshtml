@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Ruta</h2>
+<a class="btn btn-primary" data-target="#Reporte" data-toggle="modal" onclick="ListaRutas()">Imprimir Rutas</a>
+
+
+<div class="modal fade" id="Reporte" tabindex="-1" role="dialog" aria-labelledby="EtiquetaModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="EtiquetaModal">
+                    Lista de Rutas
+                </h4>
+            </div>
+            <div class="modal-body" id="Imprimir_Rutas">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Nombre
+                            </th>
+                            <th>
+                                Descripcion
+                            </th>
+                            <th>
+                                Estado
+                            </th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody id="Cuerpo_Ruta"></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="">Cerrar</button>
+                <button id="graba" type="button" class="btn btn-primary" onclick="Imprimir_Rutas()">Imprimir</button>
+            </div>
+        </div>
+    </div>
+</div>

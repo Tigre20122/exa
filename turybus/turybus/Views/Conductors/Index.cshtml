@@ -1,0 +1,169 @@
+﻿@model IEnumerable<turybus.Models.Conductor>
+
+@{
+    ViewData["Title"] = "Conductor";
+}
+
+<h2>Conductor</h2>
+
+<p>
+    <a data-toggle="modal" data-target="#modalACon" class="btn btn-info">Agregar Conductor</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cedula)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cedula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Direccion)
+                </td>
+                <td>
+                    <a data-toggle="modal" data-target="#modalED" class="btn btn-success" onclick="getConductorAjax('@item.IdConductor','Conductors/MostrarAjax')">Editar</a> |
+                    <a data-toggle="modal" data-target="#modalcon" class="btn btn-info" onclick="getConductorAjax('@item.IdConductor','Conductors/MostrarAjax')">Mostrar</a> |
+                    <a data-toggle="modal" data-target="#modalcone" class="btn btn-danger" onclick="getConductorAjax('@item.IdConductor','Conductors/MostrarAjax')">Eliminar</a> |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!--Nuevo-->
+<div class="modal fade" id="modalACon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Agregar Nuevo Conductor</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="Cedula" class="control-label">Cedula</label>
+                        <input for="Cedula" name="Cedula" id="Cedula" form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Nombre" class="control-label">Nombre</label>
+                        <input for="Nombre" name="Nombre" id="Nombre" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Apellido" class="control-label">Apellido</label>
+                        <input for="Apellido" name="Apellido" id="Apellido" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Telefono" class="control-label">Telefono</label>
+                        <input for="Telefono" name="Telefono" id="Telefono" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Direccion" class="control-label">Direccion</label>
+                        <input for="Direccion" name="Direccion" id="Direccion" class="form-control" />
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" onclick="agregarConductor()" class="btn btn-danger">Agregar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Mostrar-->
+<div class="modal fade" id="modalcon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Mostrar Conductor</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type="hidden" for="IdConductor" name="IdConductor" id="IdConductor" />
+
+                    <div class="form-group">
+                        <label for="Cedula" class="control-label">Cedula</label>
+                        <input for="Cedula" name="Cedula" id="Cedula" disabled class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Nombre" class="control-label">Nombre</label>
+                        <input for="Nombre" name="Nombre" id="Nombre" disabled class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Apellido" class="control-label">Apellido</label>
+                        <input for="Apellido" name="Apellido" id="Apellido" disabled class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Telefono" class="control-label">Telefono</label>
+                        <input for="Telefono" name="Telefono" id="Telefono" disabled class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Direccion" class="control-label">Direccion</label>
+                        <input for="Direccion" name="Direccion" id="Direccion" disabled class="form-control" />
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Eliminar-->
+<div class="modal fade" id="modalcone" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Mostrar Conductor</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type="hidden" for="IdConductor" name="IdConductor" id="IdConductor" />
+
+                   
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" onclick="EliminarConductorAjax('Conductors/EliminarAjax')" class="btn btn-success">Eliminar</button>
+
+            </div>
+        </div>
+    </div>
+</div>

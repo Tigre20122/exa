@@ -1,0 +1,171 @@
+﻿@model IEnumerable<turybus.Models.Ruta>
+
+@{
+    ViewData["Title"] = "Ruta";
+}
+
+<h2>Ruta</h2>
+
+<p>
+    <a data-toggle="modal" data-target="#modalAR" class="btn btn-info">Agregar Ruta</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    <a data-toggle="modal" data-target="#modalED" class="btn btn-success" onclick="getRutaAjax('@item.IdRuta','Rutas/MostrarAjax')">Editar</a> |
+                    <a data-toggle="modal" data-target="#modalM" class="btn btn-info" onclick="getRutaAjax('@item.IdRuta','Rutas/MostrarAjax')">Mostrar</a> |
+                    <a data-toggle="modal" data-target="#modalE" class="btn btn-danger" onclick="getRutaAjax('@item.IdRuta','Rutas/MostrarAjax')">Eliminar</a> |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!--Mostrar-->
+<div class="modal fade" id="modalM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Mostrar Rutas</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type="hidden" for="IdRuta" name="IdRuta" id="IdRuta" />
+                    <div class="form-group">
+                        <label for="Nombre" class="control-label">Nombre Ruta</label>
+                        <input for="Nombre" class="form-control" disabled name="Nombre" id="Nombre" />
+
+                    </div>
+                    <div class="form-group">
+                        <label for="Descripcion" class="control-label">Descripcion Ruta</label>
+                        <input for="Descripcion" class="form-control" disabled name="Descripcion" id="Descripciòn" />
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+ @*Editar
+    <div class="modal fade" id="modalED" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Mostrar Rutas</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" for="IdRuta" name="IdRuta" id="IdRuta" />
+                        <div class="form-group">
+                            <label for="Nombre" class="control-label">Nombre Ruta</label>
+                            <input for="Nombre" class="form-control" name="Nombre" id="Nombre" />
+
+                        </div>
+                        <div class="form-group">
+                            <label for="Descripcion" class="control-label">Descripcion Ruta</label>
+                            <input for="Descripcion" class="form-control" name="Descripcion" id="Descripcion" />
+
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" onclick="EditarAjax('Rutas/EditarAjax')" class="btn btn-primary">Actualizar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<!--Borrar-->
+<div class="modal fade" id="modalE" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Esta Seguro de Eliminar esta ruta</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" for="IdRuta" name="IdRuta" id="IdRuta" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" onclick="EliminarAjax('Rutas/EliminarAjax')" class="btn btn-success">Eliminar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--Nuevo-->
+<div class="modal fade" id="modalAR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Agregar Nueva Ruta</h4>
+            </div>
+            <div class="modal-body">
+                <form asp-action="">
+
+                    <div class="form-group">
+                        <label for="Nombre" class="control-label">Nombre Ruta</label>
+                        <input for="Nombre" name="Nombre" id="Nombre" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Descripcion" class="control-label">Descripción Ruta</label>
+                        <input for="Descripcion" class="form-control" name="Descripcion" id="Descripcion" />
+                    </div>
+                    <div class="form-group">
+
+                        <label for="Estado" class="col-md-2 control-label">Estado</label>
+                        <div class="col-md-10">
+                            <select id="Estado" name="Estado" class="form-control">
+                                <option value="0">Seleccione un estado</option>
+                                <option value="true">Activo</option>
+                                <option value="false">No Activo</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <label id="mensaje" class="col-md-2 control-label"></label>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" onclick="agregarRuta()" class="btn btn-danger">Agregar</button>
+
+            </div>
+        </div>
+    </div>
+</div>

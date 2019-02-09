@@ -1,0 +1,12 @@
+C:\Users\titos\source\repos\turybus\turybus\bin\Debug\netcoreapp2.0\turybus.deps.json
+C:\Users\titos\source\repos\turybus\turybus\bin\Debug\netcoreapp2.0\turybus.runtimeconfig.json
+C:\Users\titos\source\repos\turybus\turybus\bin\Debug\netcoreapp2.0\turybus.runtimeconfig.dev.json
+C:\Users\titos\source\repos\turybus\turybus\bin\Debug\netcoreapp2.0\turybus.dll
+C:\Users\titos\source\repos\turybus\turybus\bin\Debug\netcoreapp2.0\turybus.pdb
+C:\Users\titos\source\repos\turybus\turybus\obj\Debug\netcoreapp2.0\turybus.csprojAssemblyReference.cache
+C:\Users\titos\source\repos\turybus\turybus\obj\Debug\netcoreapp2.0\turybus.csproj.CoreCompileInputs.cache
+C:\Users\titos\source\repos\turybus\turybus\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\titos\source\repos\turybus\turybus\obj\Debug\netcoreapp2.0\turybus.AssemblyInfoInputs.cache
+C:\Users\titos\source\repos\turybus\turybus\obj\Debug\netcoreapp2.0\turybus.AssemblyInfo.cs
+C:\Users\titos\source\repos\turybus\turybus\obj\Debug\netcoreapp2.0\turybus.dll
+C:\Users\titos\source\repos\turybus\turybus\obj\Debug\netcoreapp2.0\turybus.pdb

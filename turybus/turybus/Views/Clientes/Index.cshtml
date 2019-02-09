@@ -1,0 +1,149 @@
+﻿@model IEnumerable<turybus.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Cliente</h2>
+
+<p>
+    <a data-toggle="modal" data-target="#modalAC" class="btn btn-info">Agregar Cliente</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cedula)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cedula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    <a data-toggle="modal" data-target="#modalED" class="btn btn-success" onclick="getCLienteAjax('@item.IdCliente','Clientes/MostrarAjax')">Editar</a> |
+                    <a data-toggle="modal" data-target="#modalMC" class="btn btn-info" onclick="getCLienteAjax('@item.IdCliente','Clientes/MostrarAjax')">Mostrar</a> |
+                    <a data-toggle="modal" data-target="#modalEC" class="btn btn-danger" onclick="getCLienteAjax('@item.IdCliente','Clientes/MostrarAjax')">Eliminar</a> |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!--Nuevo-->
+<div class="modal fade" id="modalAC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Agregar Nuevo Cliente</h4>
+            </div>
+            <div class="modal-body">
+                <form asp-action="">
+
+                    <div class="form-group">
+                        <label for="Cedula" class="control-label">Cedula</label>
+                        <input for="Cedula" id="Cedula" name="Cedula" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Nombre" class="control-label">Nombre</label>
+                        <input for="Nombre" id="Nombre" name="Nombre" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Apellido" class="control-label">Apellido</label>
+                        <input for="Apellido" id="Apellido" name="Apellido" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Telefono" class="control-label">Telefono</label>
+                        <input for="Telefono" id="Telefono" name="Telefono" class="form-control" />
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" onclick="agregarCliente()" class="btn btn-danger">Agregar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--Mostrar-->
+<div class="modal fade" id="modalMC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Mostrar Cliente</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type="hidden" for="IdCliente" name="IdCliente" id="IdCliente" />
+                    <div class="form-group">
+                        <label for="Cedula" class="control-label">Cedula</label>
+                        <input for="Cedula" class="form-control" disabled name="Cedula" id="Cedula" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Nombre" class="control-label">Nombre</label>
+                        <input for="Nombre" class="form-control" disabled name="Nombre" id="Nombre" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Apellido" class="control-label">Apellido</label>
+                        <input for="Apellido" class="form-control" disabled name="Apellido" id="Apellido" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Telefono" class="control-label">Telefono</label>
+                        <input for="Telefono" class="form-control" disabled name="Telefono" id="Telefono" />
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Borrar-->
+<div class="modal fade" id="modalEC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Esta Seguro de Eliminar esta ruta</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" for="IdCliente" name="IdCliente" id="IdCliente" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" onclick="EliminarClienteAjax('Clientes/EliminarAjax')" class="btn btn-success">Eliminar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
